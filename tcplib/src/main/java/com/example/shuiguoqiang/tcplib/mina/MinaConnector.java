@@ -1,5 +1,6 @@
-package com.example.shuiguoqiang.minacient.mina;
-import com.example.shuiguoqiang.minacient.LogUtil;
+package com.example.shuiguoqiang.tcplib.mina;
+
+import com.example.shuiguoqiang.tcplib.LogUtil;
 
 import org.apache.mina.core.filterchain.IoFilterAdapter;
 import org.apache.mina.core.future.ConnectFuture;
@@ -57,8 +58,25 @@ public class MinaConnector {
             }
 
             @Override
-            public void messageReceived(IoSession ioSession, Object o) throws Exception {
-                ioListener.onmessageReceived(ioSession,o);
+            public void messageReceived(IoSession ioSession, Object message) throws Exception {
+                byte[] ioBuffer = (byte[]) message;
+                int tt = 0;
+//			System.out.println("打印包的长度："+ioBuffer.length);
+                byte[] utf_8 = BaseNetTool.getUTF_8(ioBuffer, tt, 1);
+                if ("|".equals(new String(utf_8))) {
+                    tt += 1;
+                    int length = BaseNetTool.Getint(ioBuffer, tt);
+                    tt += 4;
+                    byte[] reciveData = BaseNetTool.getbyte(ioBuffer, tt, length);
+                    tt += length;
+                    int k = 0;
+                    for (k = 0; k < reciveData.length; k++) {
+                        reciveData[k] ^= 255;
+                    }
+                    int position = 0;
+                    int cmd = BaseNetTool.Getint(reciveData, position);
+                    ioListener.onmessageReceived(ioSession,reciveData);
+                }
             }
 
             @Override

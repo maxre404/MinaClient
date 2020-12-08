@@ -1,2 +1,3 @@
 rootProject.name='MinaCient'
 include ':app'
+include ':tcplib'

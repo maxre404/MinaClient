@@ -1,6 +1,6 @@
-package com.example.shuiguoqiang.minacient.mina;
+package com.example.shuiguoqiang.tcplib.mina;
 
-import com.example.shuiguoqiang.minacient.LogUtil;
+import com.example.shuiguoqiang.tcplib.LogUtil;
 import com.jcraft.jzlib.JZlib;
 import com.jcraft.jzlib.ZInputStream;
 import com.jcraft.jzlib.ZOutputStream;

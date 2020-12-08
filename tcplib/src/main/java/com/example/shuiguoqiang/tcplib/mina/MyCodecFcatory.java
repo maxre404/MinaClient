@@ -1,4 +1,4 @@
-package com.example.shuiguoqiang.minacient.mina;
+package com.example.shuiguoqiang.tcplib.mina;
 
 import org.apache.mina.core.session.IoSession;
 import org.apache.mina.filter.codec.CumulativeProtocolDecoder;
